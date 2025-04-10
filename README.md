@@ -22,7 +22,7 @@ What is NOT supported:
 Bill of material:
  - ESP32 (30 or 38 pins will do)
  - RT8720DN BW16 (do not buy BW16E - it does not see 5ghz networks)
- - 0.96 OLED spi screen (I2C version coming soon)
+ - 0.96 OLED SPI SSD1306 screen (I2C version coming soon)
 
 
 # Usage
@@ -56,7 +56,11 @@ BW16 - ESP32
  - PA26 - D21
  - PA25 - D22
 
+# Deployment to boards
+1. Master file is to be deployed onto BW16. You need to add this path to Arduino IDE in order to be able to select the RTL8720DN (BW16) board:
+https://github.com/ambiot/ambd_arduino/raw/master/Arduino_package/package_realtek_amebad_index.json
 
+2. Slave file is to be deployed to ESP32. You need to add this board: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json and the select NodeMCU-32S. 
 
 # Pictures
 ![Img1](twin1.png)
