@@ -1,9 +1,10 @@
 # BW16-ESP32-Evil-Twin
 This project is implementing features known from Airgeddon, but on 2 tiny boards: “Esp32” and “RTL8720DN BW16” (plus an SPI screen).
 
-It is based on beatiful 
-[TesaKlebeband ](https://github.com/tesa-klebeband/RTL8720dn-Deauther)
-and unfinished https://github.com/aadesh0706/IOT-ESP32-Evil-Twin-WiFi-Hacking-Deauthentication-Captive-Portal
+# Kudos
+It is based on the beautiful 
+[Tesa Klebeband Deauther ](https://github.com/tesa-klebeband/RTL8720dn-Deauther)
+and unfinished https://github.com/aadesh0706/IOT-ESP32-Evil-Twin-WiFi-Hacking-Deauthentication-Captive-Portal where the evil portal html code comes from.
 
 
 # Features
