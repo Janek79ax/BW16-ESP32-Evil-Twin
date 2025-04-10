@@ -20,9 +20,9 @@ What is NOT supported:
 
 # BOM
 Bill of material:
-ESP32 (30 or 38 pins will do)
-RT8720DN BW16 (do not buy BW16E - it does not see 5ghz networks)
-0.96 oled spi screen (I2C version coming soon)
+ - ESP32 (30 or 38 pins will do)
+ - RT8720DN BW16 (do not buy BW16E - it does not see 5ghz networks)
+ - 0.96 OLED spi screen (I2C version coming soon)
 
 
 # Usage
@@ -42,19 +42,19 @@ Enter some rubbish password and check the screen - it will tell if it tries to v
 # Build process / cables wiring
 
 OLED - ESP32:
-GND - GND
-VCC - 3V3
-D0 - D18
-D1 - D23
-RES - D16
-DC - D17
-CS - D5
+ - GND - GND
+ - VCC - 3V3
+ - D0 - D18
+ - D1 - D23
+ - RES - D16
+ - DC - D17
+ - CS - D5
 
 BW16 - ESP32
-5V - VIN
-GND - GND
-PA26 - D21
-PA25 - D22
+ - 5V - VIN
+ - GND - GND
+ - PA26 - D21
+ - PA25 - D22
 
 
 
