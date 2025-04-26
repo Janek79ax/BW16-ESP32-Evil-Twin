@@ -31,6 +31,7 @@ ESP's SCL (22) is connected to RTL PA25
 #include <Wire.h>
 
 
+
 typedef struct {
   String ssid;
   String bssid_str;
@@ -167,6 +168,13 @@ void handleRoot(WiFiClient &client) {
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>RTL8720DN DEAUTHER & ESP32 EVIL TWIN</title>
+      <script>
+      function encodeInput() {
+          let input = document.querySelector("select[name='evilTwinNetwork']");
+          input.value = encodeURIComponent(input.value); // Changes space into %20, instead of +
+      }
+      </script>
+      
       <style>
           body {
               font-family: Arial, sans-serif;
@@ -222,7 +230,7 @@ void handleRoot(WiFiClient &client) {
       <h1>RTL8720DN DEAUTHER & ESP32 EVIL TWIN</h1>
 
       <h2>Select Access Points to deauth:</h2>
-      <form method="post" action="/deauth">
+      <form method="post" action="/deauth" onsubmit=\"encodeInput()\">
           <table>
               <tr>
                   <th>Select</th>
@@ -436,6 +444,27 @@ void setup() {
   delay(5000);
 }
 
+String urlDecode(String input) {
+    String output = "";
+    char temp[3] = {'\0', '\0', '\0'};
+    
+    for (size_t i = 0; i < input.length(); i++) {
+        if (input[i] == '%') {
+            if (i + 2 < input.length()) {
+                temp[0] = input[i + 1];
+                temp[1] = input[i + 2];
+                char decodedChar = strtol(temp, NULL, 16);
+                output += decodedChar;
+                i += 2;
+            }
+        } else if (input[i] == '+') {
+            output += ' ';
+        } else {
+            output += input[i];
+        }
+    }
+    return output;
+}
 
 //Main LOOP
 
@@ -564,7 +593,8 @@ void loop() {
               } else if (param.first == "reason") {
                 deauth_reason = String(param.second).toInt();
               } else if (param.first == "evilTwinNetwork") {
-                evilTwinNetworkName = String(param.second);
+                
+                evilTwinNetworkName = String(urlDecode(param.second));
                 DEBUG_SER_PRINT("\nEvilTwinNetworkName: " + evilTwinNetworkName + "\n");
               }
             }
