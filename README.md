@@ -23,7 +23,7 @@ What is NOT supported:
 Bill of material:
  - ESP32 (30 or 38 pins will do)
  - RTL8720DN (BW16) (do not buy BW16E - it does not see 5ghz networks)
- - 0.96 OLED SPI SSD1306 screen (I2C version coming soon)
+ - 0.96 OLED SPI SSD1306 screen
 
 Cost: each board approx 5 euros, screen 1 euro on Chinese portals.
 
@@ -40,6 +40,24 @@ After starting the attack, the page will disappear - boards are busy. You may no
 Next, verify that all clients have been kicked out of selected networks. 
 Also check if evil twin unsecured network has been set up, connect to it and check if you can see fake router update page asking to enter password. 
 Enter some rubbish password and check the oled screen - it will tell if it tries to verify a password provided by user and if this attempt was successful. 
+
+# ESP32 pinout
+There are 2 popular ESP32 boards: 30 pins and 38 pins. See pinout schemes below. Check your board and compare. 
+
+![30pins](esp32-30pins.png)
+
+![38pins](esp32-38pins.png)
+
+
+# Important warning
+ESP32 pin in the next section applies to the pink/magenta color description.
+
+Example: 
+OLED - ESP32:
+ - D1 - D23
+
+D23 is described as GPIO23 and on both boards is towards top-right corner (with irrelevant number 36). 
+![pin23](pin23.png)
 
 
 # Build process / cables wiring
@@ -58,6 +76,8 @@ BW16 - ESP32
  - GND - GND
  - PA26 - D21
  - PA25 - D22
+
+
 
 # Deployment to boards
 1. Master file is to be deployed onto BW16. You need to add this path to Arduino IDE in order to be able to select the RTL8720DN (BW16) board:
