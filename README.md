@@ -83,6 +83,9 @@ BW16 - ESP32
 1. Master file is to be deployed onto BW16. You need to add this path to Arduino IDE in order to be able to select the RTL8720DN (BW16) board:
 https://github.com/ambiot/ambd_arduino/raw/master/Arduino_package/package_realtek_amebad_index.json
 
+Important: In boards manager, uninstall Realtek ameba board definition 3.1.8 and install 3.1.7 instead.
+
+
 2. Slave file is to be deployed to ESP32. You need to add this board: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json and the select NodeMCU-32S. 
 
 # Pictures
