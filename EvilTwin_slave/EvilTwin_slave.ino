@@ -134,6 +134,10 @@ void acceptEvilTwinOrderOrFinishSignal(int numBytes) {
 
     dnsServer.stop();
     WiFi.softAPdisconnect(true);
+    WiFi.disconnect(true);
+    WiFi.mode(WIFI_OFF);
+
+
 
   } else {
     if (receivedData.equals("#()^7842%_BadPass")) {
@@ -159,6 +163,7 @@ void acceptEvilTwinOrderOrFinishSignal(int numBytes) {
         //ok, do we have a new Evil AP to start?
         if (!evilAPName.equals(receivedEvilAPName)) {
           evilAPName = receivedEvilAPName;
+          evilAPName += "\u200B"; //avoid iPhone grouping
           //start attack on evilAP
           Serial.print("Starting Evil Twin for: ");
           Serial.println(evilAPName);
